@@ -40,7 +40,7 @@ class sheet_manage {
         'return-empty': true
       }, (err, cells) => {
         if (err) return reject(err);
-        for (let i in cells) {
+        for (let i = 0 ; i < cells.length ; i+=2) {
           if (cells[i].value == '') {
             i = parseInt(i);
             cells[i].value = menu;
