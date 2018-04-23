@@ -72,11 +72,11 @@ class sheet_manage {
         'min-row': 3,
         'max-row': 52,
         'min-col': 2,
-        'max-col': 7,
+        'max-col': 8,
         'return-empty': true
       }, (err, cells) => {
         if (err) return reject(err);
-        for (let i in cells) {
+        for(let i = 0 ; i < cells.length ; i+=7){
           if (cells[i].value == '') {
             i = parseInt(i);
             cells[i].value = menu;
@@ -85,19 +85,24 @@ class sheet_manage {
             cells[i + 3].value = location;
             cells[i + 4].value = phone;
             cells[i + 5].value = "รับออเดอร์";
+            cells[i + 6].value = new Date();
             this.back_shop.bulkUpdateCells(cells);
             console.log(`[${i},${i + 1}] Add back transcript ${menu} with 1 ea.`);
-            return resolve((i / 6) + 1);
+            return resolve((i / 7) + 1);
           }
         }
       })
     })
+  }
+  
+  _updateOrderStatus(){
+
   }
 }
 
 let sheet = new sheet_manage();
 sheet.connect().then(() => {
   // sheet.addFrontTranscript("ทดสอบจาก API", 2).then(id=>console.log("Add at id : " + id))
-  // sheet.addBackTranscript("ทดสอบ order จาก api", { customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
+  sheet.addBackTranscript("ทดสอบ order จาก api", { customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
 })
 module.exports = sheet_manage;
