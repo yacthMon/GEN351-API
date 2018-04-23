@@ -110,13 +110,13 @@ class sheet_manage {
           if (cells[i].value == id) {
             i = parseInt(i);
             return resolve({
-              id:id,
-              order_detail : cells[i+1],
-              customer_name : cells[i+3],
-              pickup_location : cells[i+4],
-              phone : cells[i+5],
-              oreder_status : cells[i+6],
-              oredered_date : cells[i+7],
+              id: id,
+              order_detail: cells[i + 1].value,
+              customer_name: cells[i + 3].value,
+              pickup_location: cells[i + 4].value,
+              phone: cells[i + 5].value,
+              oreder_status: cells[i + 6].value,
+              oredered_date: cells[i + 7].value,
             });
           }
         }
@@ -165,5 +165,7 @@ sheet.connect().then(() => {
   // sheet.addFrontTranscript("ทดสอบจาก API", 2).then(id=>console.log("Add at id : " + id))
   // sheet.addBackTranscript("ทดสอบ order จาก api", { customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
   // sheet._updateOrderStatus(5, order_status.cooking);
+  sheet.getOrderDetail(2).then(result => console.log(result));
+
 })
 module.exports = sheet_manage;
