@@ -38,6 +38,10 @@ Installing node module
 npm i
 ```
 
+Default port is `8800`
+
+you can change port in `index.js` at line 4
+
 # Documents
 
 **Add new transaction for front shop**
