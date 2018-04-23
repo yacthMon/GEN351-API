@@ -224,13 +224,13 @@ class sheet_manage {
   }
 }
 
-let sheet = new sheet_manage();
-sheet.connect().then(() => {
-  // sheet.addFrontTranscript("ทดสอบจาก API", 2).then(id=>console.log("Add at id : " + id))
-  // sheet.addBackOrder("ทดสอบ order จาก api", 3,{ customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
-  // sheet._updateOrderStatus(5, order_status.cooking);
-  // sheet.getOrderDetail(2).then(result => console.log(result));
-  // sheet.getCookingOrders().then(result => console.log(result))
-  // sheet.getReceivedOrders().then(result => console.log(result))
-})
+// let sheet = new sheet_manage();
+// sheet.connect().then(() => {
+// 1  // sheet.addFrontTranscript("ทดสอบจาก API", 2).then(id=>console.log("Add at id : " + id))
+// 1  // sheet.addBackOrder("ทดสอบ order จาก api", 3,{ customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
+//   // sheet.cookingOrder(5);
+//   // sheet.getOrderDetail(2).then(result => console.log(result));
+//   // sheet.getCookingOrders().then(result => console.log(result))
+//   // sheet.getReceivedOrders().then(result => console.log(result))
+// })
 module.exports = sheet_manage;
