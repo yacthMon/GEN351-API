@@ -132,4 +132,54 @@ router.post('/back/cancel', (req, res) => {
   return res.json({ msg: "Order status Cancel.", order_id: data.id });
 })
 
+router.get('/back/received', (req, res) => {
+  sheet_manage.getReceivedOrders().then(result => {
+    res.status(200);
+    return res.json({ status: 'OK', order: result });
+  }, err => {
+    res.status(500);
+    res.json({ err });
+  })
+})
+
+router.get('/back/cooking', (req, res) => {
+  sheet_manage.getCookingOrders().then(result => {
+    res.status(200);
+    return res.json({ status: 'OK', order: result });
+  }, err => {
+    res.status(500);
+    res.json({ err });
+  })
+})
+
+router.get('/back/transit', (req, res) => {
+  sheet_manage.getIransitOrders().then(result => {
+    res.status(200);
+    return res.json({ status: 'OK', order: result });
+  }, err => {
+    res.status(500);
+    res.json({ err });
+  })
+})
+
+router.get('/back/delivered', (req, res) => {
+  sheet_manage.getDeliveredOrders().then(result => {
+    res.status(200);
+    return res.json({ status: 'OK', order: result });
+  }, err => {
+    res.status(500);
+    res.json({ err });
+  })
+})
+
+router.get('/back/cancel', (req, res) => {
+  sheet_manage.getCancelOrders().then(result => {
+    res.status(200);
+    return res.json({ status: 'OK', order: result });
+  }, err => {
+    res.status(500);
+    res.json({ err });
+  })
+})
+
 module.exports = router
