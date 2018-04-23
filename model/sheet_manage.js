@@ -3,6 +3,7 @@ let async = require('async');
 
 // spreadsheet key is the long id in the sheets URL
 let doc = new GoogleSpreadsheet('1UA5H3zmHr8QF_LBLd2qlZg5lRs41Ha1Xl9eXgFAWjHA');
+let order_status = { received_order: "รับออเดอร์", cooking: "กำลังปรุง", in_transit: "กำลังส่ง", delivered: "ส่งเสร็จแล้ว", cancel: "ยกเลิก" }
 let front_shop;
 let back_shop;
 
@@ -40,7 +41,7 @@ class sheet_manage {
         'return-empty': true
       }, (err, cells) => {
         if (err) return reject(err);
-        for (let i = 0 ; i < cells.length ; i+=2) {
+        for (let i = 0; i < cells.length; i += 2) {
           if (cells[i].value == '') {
             i = parseInt(i);
             cells[i].value = menu;
@@ -76,7 +77,7 @@ class sheet_manage {
         'return-empty': true
       }, (err, cells) => {
         if (err) return reject(err);
-        for(let i = 0 ; i < cells.length ; i+=7){
+        for (let i = 0; i < cells.length; i += 7) {
           if (cells[i].value == '') {
             i = parseInt(i);
             cells[i].value = menu;
@@ -94,15 +95,47 @@ class sheet_manage {
       })
     })
   }
-  
-  _updateOrderStatus(){
 
+  _updateOrderStatus(id, status) {
+    this.back_shop.getCells({
+      'min-row': 3,
+      'max-row': 52,
+      'min-col': 1,
+      'max-col': 8,
+      'return-empty': true
+    }, (err, cells) => {
+      if (err) return err;
+      for (let i = 0; i < cells.length; i += 8) {
+        if (cells[i].value == id) {
+          cells[i + 6].value = status;
+          this.back_shop.bulkUpdateCells(cells);
+          console.log(`Row ID [${id}] update status to ${status}.`);
+        }
+      }
+    })
+  }
+
+  cookingOrder(id) {
+    this._updateOrderStatus(id, order_status.cooking);
+  }
+
+  transitOrder(id) {
+    this._updateOrderStatus(id, order_status.in_transit);
+  }
+
+  deliveredOrder(id) {
+    this._updateOrderStatus(id, order_status.delivered);
+  }
+
+  cancelOrder(id) {
+    this._updateOrderStatus(id, order_status.cancel);
   }
 }
 
 let sheet = new sheet_manage();
 sheet.connect().then(() => {
   // sheet.addFrontTranscript("ทดสอบจาก API", 2).then(id=>console.log("Add at id : " + id))
-  sheet.addBackTranscript("ทดสอบ order จาก api", { customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
+  // sheet.addBackTranscript("ทดสอบ order จาก api", { customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
+  // sheet._updateOrderStatus(5, order_status.cooking);
 })
 module.exports = sheet_manage;
