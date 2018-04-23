@@ -56,7 +56,7 @@ class sheet_manage {
     })
   }
 
-  addBackTranscript(menu, { customer_name, location, phone }) {
+  addBackOrder(menu, { customer_name, location, phone }) {
     return new Promise((resolve, reject) => {
       switch (undefined) {
         case customer_name:
@@ -163,7 +163,7 @@ class sheet_manage {
 let sheet = new sheet_manage();
 sheet.connect().then(() => {
   // sheet.addFrontTranscript("ทดสอบจาก API", 2).then(id=>console.log("Add at id : " + id))
-  // sheet.addBackTranscript("ทดสอบ order จาก api", { customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
+  // sheet.addBackOrder("ทดสอบ order จาก api", { customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
   // sheet._updateOrderStatus(5, order_status.cooking);
   // sheet.getOrderDetail(2).then(result => console.log(result));
 
