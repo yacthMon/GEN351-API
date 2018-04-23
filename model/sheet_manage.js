@@ -162,7 +162,7 @@ class sheet_manage {
         for (let i = 0; i < cells.length; i += column_length) {
           if (cells[i + order_column.status].value == status) {
             result.push({
-              id: id,
+              id: cells[i].value,
               order_detail: cells[i + order_column.order_detail].value,
               customer_name: cells[i + order_column.customer_name].value,
               pickup_location: cells[i + order_column.pickup_location].value,
@@ -192,6 +192,36 @@ class sheet_manage {
   cancelOrder(id) {
     this._updateOrderStatus(id, order_status.cancel);
   }
+
+  getReceivedOrders() {
+    return new Promise((resolve, reject) => {
+      this._getOrderDetailByStatus(order_status.received_order).then(result => resolve(result), err => reject(err));
+    })
+  }
+
+  getCookingOrders() {
+    return new Promise((resolve, reject) => {
+      this._getOrderDetailByStatus(order_status.cooking).then(result => resolve(result), err => reject(err));
+    })
+  }
+
+  getIransitOrders() {
+    return new Promise((resolve, reject) => {
+      this._getOrderDetailByStatus(order_status.in_transit).then(result => resolve(result), err => reject(err));
+    })
+  }
+
+  getDeliveredOrders() {
+    return new Promise((resolve, reject) => {
+      this._getOrderDetailByStatus(order_status.delivered).then(result => resolve(result), err => reject(err));
+    })
+  }
+
+  getCancelOrders() {
+    return new Promise((resolve, reject) => {
+      this._getOrderDetailByStatus(order_status.cancel).then(result => resolve(result), err => reject(err));
+    })
+  }
 }
 
 let sheet = new sheet_manage();
@@ -200,6 +230,7 @@ sheet.connect().then(() => {
   // sheet.addBackOrder("ทดสอบ order จาก api", 3,{ customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
   // sheet._updateOrderStatus(5, order_status.cooking);
   // sheet.getOrderDetail(2).then(result => console.log(result));
-
+  // sheet.getCookingOrders().then(result => console.log(result))
+  // sheet.getReceivedOrders().then(result => console.log(result))
 })
 module.exports = sheet_manage;
