@@ -56,7 +56,7 @@ class sheet_manage {
     })
   }
 
-  addBackOrder(menu, { customer_name, location, phone }) {
+  addBackOrder(menu, amount, { customer_name, location, phone }) {
     return new Promise((resolve, reject) => {
       switch (undefined) {
         case customer_name:
@@ -73,23 +73,24 @@ class sheet_manage {
         'min-row': 3,
         'max-row': 52,
         'min-col': 2,
-        'max-col': 8,
+        'max-col': 9,
         'return-empty': true
       }, (err, cells) => {
+        let column_length = 8
         if (err) return reject(err);
-        for (let i = 0; i < cells.length; i += 7) {
+        for (let i = 0; i < cells.length; i += column_length) {
           if (cells[i].value == '') {
             i = parseInt(i);
             cells[i].value = menu;
-            cells[i + 1].numericValue = 30;
-            cells[i + 2].value = customer_name;
-            cells[i + 3].value = location;
-            cells[i + 4].value = phone;
-            cells[i + 5].value = "รับออเดอร์";
-            cells[i + 6].value = new Date();
+            cells[i + 1].numericValue = amount;
+            cells[i + 3].value = customer_name;
+            cells[i + 4].value = location;
+            cells[i + 5].value = phone;
+            cells[i + 6].value = "รับออเดอร์";
+            cells[i + 7].value = new Date();
             this.back_shop.bulkUpdateCells(cells);
             console.log(`[${i},${i + 1}] Add back transcript ${menu} with 1 ea.`);
-            return resolve((i / 7) + 1);
+            return resolve((i / column_length) + 1);
           }
         }
       })
@@ -102,21 +103,22 @@ class sheet_manage {
         'min-row': 3,
         'max-row': 52,
         'min-col': 1,
-        'max-col': 8,
+        'max-col': 9,
         'return-empty': true
       }, (err, cells) => {
         if (err) return reject(err);
-        for (let i = 0; i < cells.length; i += 8) {
+        let column_length = 9;
+        for (let i = 0; i < cells.length; i += column_length) {
           if (cells[i].value == id) {
             i = parseInt(i);
             return resolve({
               id: id,
               order_detail: cells[i + 1].value,
-              customer_name: cells[i + 3].value,
-              pickup_location: cells[i + 4].value,
-              phone: cells[i + 5].value,
-              oreder_status: cells[i + 6].value,
-              oredered_date: cells[i + 7].value,
+              customer_name: cells[i + 4].value,
+              pickup_location: cells[i + 5].value,
+              phone: cells[i + 6].value,
+              oreder_status: cells[i + 7].value,
+              oredered_date: cells[i + 8].value,
             });
           }
         }
@@ -129,13 +131,14 @@ class sheet_manage {
       'min-row': 3,
       'max-row': 52,
       'min-col': 1,
-      'max-col': 8,
+      'max-col': 9,
       'return-empty': true
     }, (err, cells) => {
       if (err) return err;
-      for (let i = 0; i < cells.length; i += 8) {
+      let column_length = 9
+      for (let i = 0; i < cells.length; i += column_length) {
         if (cells[i].value == id) {
-          cells[i + 6].value = status;
+          cells[i + 7].value = status;
           this.back_shop.bulkUpdateCells(cells);
           return console.log(`Row ID [${id}] update status to ${status}.`);
         }
@@ -163,7 +166,7 @@ class sheet_manage {
 let sheet = new sheet_manage();
 sheet.connect().then(() => {
   // sheet.addFrontTranscript("ทดสอบจาก API", 2).then(id=>console.log("Add at id : " + id))
-  // sheet.addBackOrder("ทดสอบ order จาก api", { customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
+  // sheet.addBackOrder("ทดสอบ order จาก api", 3,{ customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
   // sheet._updateOrderStatus(5, order_status.cooking);
   // sheet.getOrderDetail(2).then(result => console.log(result));
 

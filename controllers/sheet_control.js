@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-let sheet_manage = new require("../model/sheet_manage")();
+const sheet = require("../model/sheet_manage")
+let sheet_manage = new sheet();
+
 
 !function () {
   sheet_manage.connect().then(() => {
@@ -37,6 +39,7 @@ router.post('/front/add', (req, res) => {
 router.post('/back/order', (req, res) => {
   let data = {
     menu: req.body.menu,
+    amount: req.body.amount,
     customer_name: req.body.customer_name,
     pickup_location: req.body.pickup_location,
     phone: req.body.phone
@@ -45,6 +48,10 @@ router.post('/back/order', (req, res) => {
     case data.menu:
       res.status(400)
       return res.json({ error: "menu is required." })
+      break;
+    case data.amount:
+      res.status(400)
+      return res.json({ error: "amount is required." })
       break;
     case data.customer_name:
       res.status(400)
@@ -59,7 +66,7 @@ router.post('/back/order', (req, res) => {
       return res.json({ error: "phone is required." })
       break;
   }
-  sheet_manage.addBackOrder(data.menu, data).then(id => {
+  sheet_manage.addBackOrder(data.menu, data.amount, data).then(id => {
     res.status(201)
     return res.json({ msg: "Order created.", order_id: id });
   })
