@@ -109,7 +109,7 @@ class sheet_manage {
         for (let i = 0; i < cells.length; i += 8) {
           if (cells[i].value == id) {
             i = parseInt(i);
-            resolve({
+            return resolve({
               id:id,
               order_detail : cells[i+1],
               customer_name : cells[i+3],
@@ -137,7 +137,7 @@ class sheet_manage {
         if (cells[i].value == id) {
           cells[i + 6].value = status;
           this.back_shop.bulkUpdateCells(cells);
-          console.log(`Row ID [${id}] update status to ${status}.`);
+          return console.log(`Row ID [${id}] update status to ${status}.`);
         }
       }
     })
