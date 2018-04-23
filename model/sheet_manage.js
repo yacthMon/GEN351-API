@@ -165,7 +165,7 @@ sheet.connect().then(() => {
   // sheet.addFrontTranscript("ทดสอบจาก API", 2).then(id=>console.log("Add at id : " + id))
   // sheet.addBackTranscript("ทดสอบ order จาก api", { customer_name: "ยอสเอง", location: "หน้าตึก SIT", phone: "08ไม่บอกหรอก" }).then(id => console.log("Add at id : " + id));
   // sheet._updateOrderStatus(5, order_status.cooking);
-  sheet.getOrderDetail(2).then(result => console.log(result));
+  // sheet.getOrderDetail(2).then(result => console.log(result));
 
 })
 module.exports = sheet_manage;

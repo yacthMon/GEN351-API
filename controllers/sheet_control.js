@@ -1,26 +1,34 @@
 const express = require('express');
 const router = express.Router();
-let sheet_manage = require("../model/sheet_manage");
+let sheet_manage = new require("../model/sheet_manage")();
+
+!function(){
+  sheet_manage.connect().then(()=>{
+    console.log("Connect sheet success.");
+    console.log("API Ready on /api/");
+  })
+}
 
 router.get('/', (req, res) => {
-  // if (req.body.player_name) {
-  //     stats.getPlayerStats(req.body.player_name).then(stats => {
-  //         if (stats) {
-  //             res.status(200);
-  //             res.json({ status: true, stats });
-  //         } else {
-  //             res.status(404);
-  //             res.json({ status: false, message : "Player not found." });
-  //         }
-  //     }, err => {
-  //         res.status(500);
-  //         res.json({ error: err });
-  //     });
-  // } else {
-  //     res.status(400)
-  //     return res.json({error:"You must provide player name."})
-  // }
-  res.json({msg:"Welcome to ครัวคุณย่า"})
+  res.json({ msg: "Welcome to ครัวคุณย่า API" })
+})
+
+router.post('/front/add', (req, res) => {
+  let data = { menu: req.body.menu, amount: req.body.amount };
+  switch (undefined) {
+    case data.menu:
+      res.status(400)
+      return res.json({ error: "menu is required." })
+      break;
+    case data.amount:
+      res.status(400)
+      return res.json({ error: "amount is required." })
+      break;
+  }
+  sheet_manage.addFrontTranscript(data.menu, data.amount).then(id => {
+    res.status(201)
+    return res.json({ msg:"Transcript created.", transcript_id : id });
+  })
 })
 
 module.exports = router
