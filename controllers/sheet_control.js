@@ -36,7 +36,7 @@ router.post('/front/add', (req, res) => {
   })
 })
 
-router.post('/back/order', (req, res) => {
+router.post('/order/order', (req, res) => {
   let data = {
     menu: req.body.menu,
     amount: req.body.amount,
@@ -75,7 +75,7 @@ router.post('/back/order', (req, res) => {
   })
 })
 
-router.post('/back/cooking', (req, res) => {
+router.post('/order/cooking', (req, res) => {
   let data = {
     id: req.body.id
   };
@@ -90,7 +90,7 @@ router.post('/back/cooking', (req, res) => {
   return res.json({ msg: "Order status Cooking.", order_id: data.id });
 })
 
-router.post('/back/transit', (req, res) => {
+router.post('/order/transit', (req, res) => {
   let data = {
     id: req.body.id
   };
@@ -105,7 +105,7 @@ router.post('/back/transit', (req, res) => {
   return res.json({ msg: "Order status In-transit.", order_id: data.id });
 })
 
-router.post('/back/delivered', (req, res) => {
+router.post('/order/delivered', (req, res) => {
   let data = {
     id: req.body.id
   };
@@ -120,7 +120,7 @@ router.post('/back/delivered', (req, res) => {
   return res.json({ msg: "Order status Delivered.", order_id: data.id });
 })
 
-router.post('/back/cancel', (req, res) => {
+router.post('/order/cancel', (req, res) => {
   let data = {
     id: req.body.id
   };
@@ -135,7 +135,7 @@ router.post('/back/cancel', (req, res) => {
   return res.json({ msg: "Order status Cancel.", order_id: data.id });
 })
 
-router.get('/back/received', (req, res) => {
+router.get('/order/received', (req, res) => {
   sheet_manage.getReceivedOrders().then(result => {
     res.status(200);
     return res.json({ status: 'OK', order: result });
@@ -145,7 +145,7 @@ router.get('/back/received', (req, res) => {
   })
 })
 
-router.get('/back/cooking', (req, res) => {
+router.get('/order/cooking', (req, res) => {
   sheet_manage.getCookingOrders().then(result => {
     res.status(200);
     return res.json({ status: 'OK', order: result });
@@ -155,7 +155,7 @@ router.get('/back/cooking', (req, res) => {
   })
 })
 
-router.get('/back/transit', (req, res) => {
+router.get('/order/transit', (req, res) => {
   sheet_manage.getIransitOrders().then(result => {
     res.status(200);
     return res.json({ status: 'OK', order: result });
@@ -165,7 +165,7 @@ router.get('/back/transit', (req, res) => {
   })
 })
 
-router.get('/back/delivered', (req, res) => {
+router.get('/order/delivered', (req, res) => {
   sheet_manage.getDeliveredOrders().then(result => {
     res.status(200);
     return res.json({ status: 'OK', order: result });
@@ -175,13 +175,29 @@ router.get('/back/delivered', (req, res) => {
   })
 })
 
-router.get('/back/cancel', (req, res) => {
+router.get('/order/cancel', (req, res) => {
   sheet_manage.getCancelOrders().then(result => {
     res.status(200);
     return res.json({ status: 'OK', order: result });
   }, err => {
     res.status(500);
     res.json({ err });
+  })
+})
+
+router.get('/order/:orderId', (req, res) => {
+  let data = {
+    id: req.params.orderId
+  };
+  switch (undefined) {
+    case data.id:
+      res.status(400)
+      return res.json({ error: "id is required." })
+      break;
+  }
+  sheet_manage.getOrderDetail(data.id).then(result=>{
+    res.status(200)
+    return res.json({ status:"OK", order : result });
   })
 })
 
