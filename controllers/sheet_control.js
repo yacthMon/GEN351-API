@@ -72,4 +72,64 @@ router.post('/back/order', (req, res) => {
   })
 })
 
+router.post('/back/cooking', (req, res) => {
+  let data = {
+    id: req.body.id
+  };
+  switch (undefined) {
+    case data.id:
+      res.status(400)
+      return res.json({ error: "id is required." })
+      break;
+  }
+  sheet_manage.cookingOrder(data.id)
+  res.status(200)
+  return res.json({ msg: "Order status Cooking.", order_id: data.id });
+})
+
+router.post('/back/transit', (req, res) => {
+  let data = {
+    id: req.body.id
+  };
+  switch (undefined) {
+    case data.id:
+      res.status(400)
+      return res.json({ error: "id is required." })
+      break;
+  }
+  sheet_manage.transitOrder(data.id)
+  res.status(200)
+  return res.json({ msg: "Order status In-transit.", order_id: data.id });
+})
+
+router.post('/back/delivered', (req, res) => {
+  let data = {
+    id: req.body.id
+  };
+  switch (undefined) {
+    case data.id:
+      res.status(400)
+      return res.json({ error: "id is required." })
+      break;
+  }
+  sheet_manage.deliveredOrder(data.id)
+  res.status(200)
+  return res.json({ msg: "Order status Delivered.", order_id: data.id });
+})
+
+router.post('/back/cancel', (req, res) => {
+  let data = {
+    id: req.body.id
+  };
+  switch (undefined) {
+    case data.id:
+      res.status(400)
+      return res.json({ error: "id is required." })
+      break;
+  }
+  sheet_manage.cancelOrder(data.id)
+  res.status(200)
+  return res.json({ msg: "Order status Cancel.", order_id: data.id });
+})
+
 module.exports = router
