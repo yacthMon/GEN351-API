@@ -96,6 +96,34 @@ class sheet_manage {
     })
   }
 
+  getOrderDetail(id) {
+    return new Promise((resolve, reject) => {
+      this.back_shop.getCells({
+        'min-row': 3,
+        'max-row': 52,
+        'min-col': 1,
+        'max-col': 8,
+        'return-empty': true
+      }, (err, cells) => {
+        if (err) return reject(err);
+        for (let i = 0; i < cells.length; i += 8) {
+          if (cells[i].value == id) {
+            i = parseInt(i);
+            resolve({
+              id:id,
+              order_detail : cells[i+1],
+              customer_name : cells[i+3],
+              pickup_location : cells[i+4],
+              phone : cells[i+5],
+              oreder_status : cells[i+6],
+              oredered_date : cells[i+7],
+            });
+          }
+        }
+      })
+    })
+  }
+
   _updateOrderStatus(id, status) {
     this.back_shop.getCells({
       'min-row': 3,
