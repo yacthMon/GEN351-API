@@ -67,8 +67,11 @@ router.post('/back/order', (req, res) => {
       break;
   }
   sheet_manage.addBackOrder(data.menu, data.amount, data).then(id => {
-    res.status(201)
+    res.status(201);
     return res.json({ msg: "Order created.", order_id: id });
+  }, err =>{
+    res.status(500);
+    return res.json(err);
   })
 })
 
