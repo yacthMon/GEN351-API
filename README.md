@@ -46,7 +46,7 @@ npm i
 
 * **URL**
 
-  /front/add
+  /api/front/add
 
 * **Method:**
 
@@ -86,7 +86,7 @@ npm i
 Javascript
   ```javascript
     $.ajax({
-      url: "/front/add",
+      url: "/api/front/add",
       dataType: "json",
       method : "POST",
       data: {
@@ -105,7 +105,7 @@ Javascript
 
 * **URL**
 
-  /order
+  /api/order
 
 * **Method:**
 
@@ -148,7 +148,7 @@ Javascript
     Javascript
   ```javascript
     $.ajax({
-      url: "/order",
+      url: "/api/order",
       dataType: "json",
       method : "POST",
       data: {
@@ -170,7 +170,7 @@ Javascript
 
 * **URL**
 
-  /order/cooking
+  /api/order/cooking
 
 * **Method:**
 
@@ -209,7 +209,7 @@ Javascript
     Javascript
   ```javascript
     $.ajax({
-      url: "/order/cooking",
+      url: "/api/order/cooking",
       dataType: "json",
       method : "POST",
       data: {
@@ -227,7 +227,7 @@ Javascript
 
 * **URL**
 
-  /order/transit
+  /api/order/transit
 
 * **Method:**
 
@@ -266,7 +266,7 @@ Javascript
     Javascript
   ```javascript
     $.ajax({
-      url: "/order/transit",
+      url: "/api/order/transit",
       dataType: "json",
       method : "POST",
       data: {
@@ -284,7 +284,7 @@ Javascript
 
 * **URL**
 
-  /order/delivered
+  /api/order/delivered
 
 * **Method:**
 
@@ -323,7 +323,7 @@ Javascript
     Javascript
   ```javascript
     $.ajax({
-      url: "/order/delivered",
+      url: "/api/order/delivered",
       dataType: "json",
       method : "POST",
       data: {
@@ -341,7 +341,7 @@ Javascript
 
 * **URL**
 
-  /order/cancel
+  /api/order/cancel
 
 * **Method:**
 
@@ -382,7 +382,7 @@ Javascript
 
 * **URL**
 
-  /order/:orderId
+  /api/order/:orderId
 
 * **Method:**
 
@@ -426,7 +426,7 @@ Javascript
     Javascript
   ```javascript
     $.ajax({
-      url: "/order/received",
+      url: "/api/order/received",
       dataType: "json",
       method : "GET",
       data: { }
@@ -442,7 +442,7 @@ Javascript
 
 * **URL**
 
-  /order/received
+  /api/order/received
 
 * **Method:**
 
@@ -497,7 +497,7 @@ Javascript
     Javascript
   ```javascript
     $.ajax({
-      url: "/order/received",
+      url: "/api/order/received",
       dataType: "json",
       method : "GET",
       data: { }
@@ -513,7 +513,7 @@ Javascript
 
 * **URL**
 
-  /order/cooking
+  /api/order/cooking
 
 * **Method:**
 
@@ -569,7 +569,7 @@ Javascript
     Javascript
   ```javascript
     $.ajax({
-      url: "/order/cooking",
+      url: "/api/order/cooking",
       dataType: "json",
       method : "GET",
       data: { }
@@ -585,7 +585,7 @@ Javascript
 
 * **URL**
 
-  /order/transit
+  /api/order/transit
 
 * **Method:**
 
@@ -640,7 +640,7 @@ Javascript
     Javascript
   ```javascript
     $.ajax({
-      url: "/order/transit",
+      url: "/api/order/transit",
       dataType: "json",
       method : "GET",
       data: { }
@@ -656,7 +656,7 @@ Javascript
 
 * **URL**
 
-  /order/delivered
+  /api/order/delivered
 
 * **Method:**
 
@@ -711,7 +711,7 @@ Javascript
     Javascript
   ```javascript
     $.ajax({
-      url: "/order/delivered",
+      url: "/api/order/delivered",
       dataType: "json",
       method : "GET",
       data: { }
@@ -727,7 +727,7 @@ Javascript
 
 * **URL**
 
-  /order/cancel
+  /api/order/cancel
 
 * **Method:**
 
@@ -782,7 +782,7 @@ Javascript
     Javascript
   ```javascript
     $.ajax({
-      url: "/order/cancel",
+      url: "/api/order/cancel",
       dataType: "json",
       method : "GET",
       data: { }
@@ -796,7 +796,7 @@ Javascript
     Javascript
   ```javascript
     $.ajax({
-      url: "/order/cancel",
+      url: "/api/order/cancel",
       dataType: "json",
       method : "POST",
       data: {
