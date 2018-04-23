@@ -57,13 +57,13 @@ class sheet_manage {
     })
   }
 
-  addBackOrder(menu, amount, { customer_name, location, phone }) {
+  addBackOrder(menu, amount, { customer_name, pickup_location, phone }) {
     return new Promise((resolve, reject) => {
       switch (undefined) {
         case customer_name:
           reject("Must provide customer_name");
           break;
-        case location:
+        case pickup_location:
           reject("Must provide location");
           break;
         case phone:
@@ -85,7 +85,7 @@ class sheet_manage {
             cells[i].value = menu;
             cells[i + (order_column.amount - 1)].numericValue = amount;
             cells[i + (order_column.customer_name - 1)].value = customer_name;
-            cells[i + (order_column.pickup_location - 1)].value = location;
+            cells[i + (order_column.pickup_location - 1)].value = pickup_location;
             cells[i + (order_column.phone - 1)].value = phone;
             cells[i + (order_column.status - 1)].value = "รับออเดอร์";
             cells[i + (order_column.date - 1)].value = new Date();

@@ -3,13 +3,10 @@ const router = express.Router();
 const sheet = require("../model/sheet_manage")
 let sheet_manage = new sheet();
 
-
-!function () {
-  sheet_manage.connect().then(() => {
-    console.log("Connect sheet success.");
-    console.log("API Ready on /api/");
-  }, err => console.error(err));
-}
+sheet_manage.connect().then(() => {
+  console.log("Connect sheet success.");
+  console.log("API Ready on /api/");
+}, err => console.error(err));
 
 router.get('/', (req, res) => {
   res.json({ msg: "Welcome to ครัวคุณย่า API" })
@@ -32,11 +29,11 @@ router.post('/front/add', (req, res) => {
     return res.json({ msg: "Transcript created.", transcript_id: id });
   }, err => {
     res.status(500);
-    res.json({ err });
+    res.json({ err:err });
   })
 })
 
-router.post('/order/order', (req, res) => {
+router.post('/order', (req, res) => {
   let data = {
     menu: req.body.menu,
     amount: req.body.amount,

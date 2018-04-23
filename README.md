@@ -105,7 +105,7 @@ Javascript
 
 * **URL**
 
-  /order/order
+  /order
 
 * **Method:**
 
@@ -148,7 +148,7 @@ Javascript
     Javascript
   ```javascript
     $.ajax({
-      url: "/order/order",
+      url: "/order",
       dataType: "json",
       method : "POST",
       data: {
